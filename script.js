@@ -100,7 +100,7 @@ const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-let stars = Array(2000).fill().map(() => ({
+let stars = Array(1000).fill().map(() => ({
   x: Math.random() * canvas.width,
   y: Math.random() * canvas.height,
   radius: Math.random() * 1.2 + 0.3,
