@@ -1,223 +1,374 @@
-// Debounce Utility
+// ======================================= //
+// ======== Debounce Utility ======== //
+// ======================================= //
 function debounce(func, wait) {
-  let timeout;
-  return function (...args) {
-    clearTimeout(timeout);
-    timeout = setTimeout(() => func.apply(this, args), wait);
-  };
+    let timeout;
+    return function (...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, args), wait);
+    };
 }
 
-// Welcome Screen Transition
+// ======================================= //
+// ======== Welcome Screen & Hero Entrance ======== //
+// ======================================= //
 window.addEventListener("load", () => {
-  const welcome = document.getElementById("welcome-screen");
-  const hero = document.querySelector(".hero");
-  const scrollPrompt = document.querySelector(".scroll-prompt");
+    const welcome = document.getElementById("welcome-screen");
+    const hero = document.querySelector(".hero");
+    const scrollPrompt = document.querySelector(".scroll-prompt");
 
-  setTimeout(() => {
-    welcome.style.opacity = "0";
-    setTimeout(() => {
-      welcome.remove();
-      hero.classList.add("show");
-      
-      // Animate scroll prompt after hero appears
-      gsap.to(scrollPrompt, {
-        opacity: 1,
-        delay: 0.5,
-        duration: 1
-      });
-    }, 1000);
-  }, 2500);
+    gsap.timeline({ delay: 0.5 }) // Start welcome animation after a slight delay
+        .to(".welcome-text", {
+            opacity: 1,
+            y: 0,
+            duration: 1.5,
+            ease: "power2.out"
+        })
+        .to(welcome, {
+            opacity: 0,
+            duration: 1,
+            ease: "power2.inOut",
+            onComplete: () => {
+                welcome.remove();
+                hero.classList.add("show"); // Ensure hero is visible
+                gsap.from(scrollPrompt, { // Animate scroll prompt
+                    opacity: 0,
+                    y: 20,
+                    duration: 1,
+                    delay: 0.5,
+                    ease: "power2.out"
+                });
+            }
+        }, "+=1"); // Start fading welcome screen after 1s pause
 });
 
-// GSAP Animations
-gsap.registerPlugin(ScrollTrigger);
+// ======================================= //
+// ======== GSAP Animations ======== //
+// ======================================= //
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 // Hero floating text animation
 gsap.to(".animated-text span", {
-  y: -5,
-  duration: 2,
-  repeat: -1,
-  yoyo: true,
-  stagger: 0.05,
-  ease: "sine.inOut"
+    y: -5,
+    duration: 2,
+    repeat: -1,
+    yoyo: true,
+    stagger: 0.05,
+    ease: "sine.inOut"
+});
+
+// Parallax effect on main content wrapper (subtle)
+gsap.to("#main-content-wrapper", {
+    y: () => -innerHeight * 0.1, // Move content wrapper up slightly slower than scroll
+    ease: "none",
+    scrollTrigger: {
+        trigger: "body",
+        start: "top top",
+        end: "bottom top",
+        scrub: true,
+    }
 });
 
 // Section Entrances with scrollTrigger (General sections)
-gsap.utils.toArray("section:not(.education)").forEach((section, index) => {
-  const direction = index % 2 === 0 ? -50 : 50; // Reduced translation
-
-  gsap.from(section, {
-    scrollTrigger: {
-      trigger: section,
-      start: "top 80%",
-      end: "bottom top",
-      toggleActions: "play reverse play reverse",
-    },
-    x: direction,
-    opacity: 0,
-    duration: 0.8, // Shorter duration
-    ease: "power2.out",
-    stagger: 0.1 // Reduced stagger
-  });
+gsap.utils.toArray("section").forEach((section) => {
+    gsap.from(section, {
+        scrollTrigger: {
+            trigger: section,
+            start: "top 75%",
+            end: "bottom center",
+            toggleActions: "play none none reverse",
+        },
+        y: 100,
+        opacity: 0,
+        duration: 1.2,
+        ease: "power3.out",
+        delay: 0.2
+    });
 });
 
-// Specific animation for Education section
-gsap.from(".education", {
-  scrollTrigger: {
-    trigger: ".education",
-    start: "top 80%",
-    end: "bottom 20%",
-    toggleActions: "play none none none",
-  },
-  x: 50, // Reduced translation
-  opacity: 0,
-  duration: 0.8,
-  ease: "power2.out"
+// Staggered list items animation with scrollTrigger (Apply to all ul in info-card)
+gsap.utils.toArray(".info-card ul").forEach(ul => {
+    gsap.from(ul.children, {
+        scrollTrigger: {
+            trigger: ul,
+            start: "top 85%",
+            toggleActions: "play none none none",
+        },
+        opacity: 0,
+        x: -30,
+        stagger: 0.1,
+        duration: 0.6,
+        ease: "power2.out"
+    });
 });
 
-// Staggered list items animation with scrollTrigger
-gsap.from("ul li", {
-  scrollTrigger: {
-    trigger: "ul",
-    start: "top 80%",
-    end: "bottom 20%",
-    toggleActions: "play none none none",
-  },
-  opacity: 0,
-  y: 20,
-  stagger: 0.05,
-  duration: 0.4
-});
-
+// ======================================= //
+// ======== Vanilla Tilt Effects ======== //
+// ======================================= //
 // Tilt Effects (desktop only)
 if (!window.matchMedia("(pointer: coarse)").matches) {
-  VanillaTilt.init(document.querySelectorAll(".project-card, .info-card"), {
-    max: 10, // Reduced tilt angle
-    speed: 400,
-    glare: true,
-    "max-glare": 0.1 // Reduced glare
-  });
+    VanillaTilt.init(document.querySelectorAll(".project-card, .info-card, .skill-card"), {
+        max: 8,
+        speed: 600,
+        glare: true,
+        "max-glare": 0.15,
+        scale: 1.02
+    });
 }
 
-// Starfield Background with Canvas (Desktop only)
-const isMobile = window.matchMedia("(max-width: 600px)").matches;
+// ======================================= //
+// ======== Custom Cursor Follower ======== //
+// ======================================= //
+const cursorFollower = document.getElementById('cursor-follower');
+const isMobileDevice = window.matchMedia("(pointer: coarse)").matches;
+
+if (!isMobileDevice) {
+    document.body.addEventListener('mousemove', (e) => {
+        gsap.to(cursorFollower, {
+            x: e.clientX,
+            y: e.clientY,
+            duration: 0.05,
+            ease: "power2.out",
+            opacity: 1
+        });
+    });
+
+    document.body.addEventListener('mouseleave', () => {
+        gsap.to(cursorFollower, {
+            opacity: 0,
+            duration: 0.3
+        });
+    });
+} else {
+    if (cursorFollower) {
+        cursorFollower.style.display = 'none';
+    }
+    document.body.style.cursor = 'default';
+    document.querySelectorAll('a, .project-card, .info-card, .animated-text span, .demo-btn, .skill-card').forEach(el => {
+        el.style.cursor = 'pointer';
+    });
+}
+
+// ======================================= //
+// ======== Canvas Background: Particle Network ======== //
+// ======================================= //
 const canvas = document.getElementById('bgCanvas');
 const ctx = canvas.getContext('2d');
+let particles = [];
+const numParticles = isMobileDevice ? 50 : 150;
+const connectionDistance = 120;
 
-if (!isMobile) {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+let currentParticleColors = [];
+let currentLineColor = '';
 
-  let stars = Array(200).fill().map(() => ({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    radius: Math.random() * 1.2 + 0.3,
-    opacity: Math.random() * 0.5 + 0.5,
-    baseColor: [50, 50, 50],
-    hoverColor: [255, 255, 255],
-    glowRadius: 5,
-    twinkleSpeed: Math.random() * 0.02 + 0.005
-  }));
+// Helper to get CSS variable value
+const getCssVar = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
 
-  let mouse = { x: null, y: null };
+// Function to update particle colors and re-initialize particles
+function updateParticleColorsAndRedraw() {
+    currentParticleColors = [
+        getCssVar('--canvas-particle-clr-1'),
+        getCssVar('--canvas-particle-clr-2'),
+        getCssVar('--canvas-particle-clr-3'),
+        getCssVar('--canvas-particle-clr-4')
+    ];
+    currentLineColor = getCssVar('--canvas-line-clr');
 
-  function drawStars() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
-    stars.forEach(star => {
-      star.opacity += (Math.random() - 0.5) * star.twinkleSpeed;
-      star.opacity = Math.max(0.3, Math.min(1, star.opacity));
-      
-      const dx = star.x - mouse.x;
-      const dy = star.y - mouse.y;
-      const distance = Math.sqrt(dx * dx + dy * dy);
-      const maxDistance = 150;
-      
-      let color = star.baseColor;
-      if (mouse.x && distance < maxDistance) {
-        const ratio = 1 - (distance / maxDistance);
-        color = [
-          Math.floor(star.baseColor[0] + (star.hoverColor[0] - star.baseColor[0]) * ratio),
-          Math.floor(star.baseColor[1] + (star.hoverColor[1] - star.baseColor[1]) * ratio),
-          Math.floor(star.baseColor[2] + (star.hoverColor[2] - star.baseColor[2]) * ratio)
-        ];
-        ctx.shadowBlur = star.glowRadius * 3;
-        ctx.shadowColor = `rgba(${star.hoverColor.join(",")}, 0.8)`;
-      } else {
-        ctx.shadowBlur = 0; // No shadow for non-hovered stars
-      }
-      
-      ctx.beginPath();
-      ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(${color.join(",")}, ${star.opacity})`;
-      ctx.fill();
-    });
-    
-    requestAnimationFrame(drawStars);
-  }
-
-  window.addEventListener('mousemove', debounce((e) => {
-    mouse.x = e.clientX;
-    mouse.y = e.clientY;
-  }, 10));
-
-  window.addEventListener('mouseout', () => {
-    mouse.x = null;
-    mouse.y = null;
-  });
-
-  drawStars();
-
-  // Debounced Resize
-  let resizeTimeout;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(() => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      stars = Array(500).fill().map(() => ({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        radius: Math.random() * 1.2 + 0.3,
-        opacity: Math.random() * 0.5 + 0.5,
-        baseColor: [50, 50, 50],
-        hoverColor: [255, 255, 255],
-        glowRadius: 5,
-        twinkleSpeed: Math.random() * 0.02 + 0.005
-      }));
-    }, 200);
-  });
+    // Re-initialize particles with new colors but keep their positions
+    // For a smoother transition, you could animate particle colors.
+    // For now, re-initializing creates new particles with new colors.
+    initParticles(); 
 }
 
-// Glowing Stars Effect for Hero Section (Desktop only)
-if (!isMobile) {
-  document.addEventListener("DOMContentLoaded", function () {
-    const hero = document.querySelector(".hero");
-    const numStars = 50; // Reduced stars
-    const stars = [];
+if (!isMobileDevice) {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
-    for (let i = 0; i < numStars; i++) {
-      const star = document.createElement("div");
-      star.classList.add("star");
-      star.style.left = `${Math.random() * 100}%`;
-      star.style.top = `${Math.random() * 100}%`;
-      hero.appendChild(star);
-      stars.push(star);
+    class Particle {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 2 + 0.5;
+            this.speedX = Math.random() * 1 - 0.5;
+            this.speedY = Math.random() * 1 - 0.5;
+            this.color = currentParticleColors[Math.floor(Math.random() * currentParticleColors.length)];
+            this.opacity = Math.random() * 0.5 + 0.5;
+        }
+
+        update() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+
+            if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+            if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+
+            this.opacity += (Math.random() - 0.5) * 0.01;
+            this.opacity = Math.max(0.3, Math.min(1, this.opacity));
+        }
+
+        draw() {
+            ctx.fillStyle = this.color.replace(/,(\s*\d+\.?\d*\s*)\)/, `, ${this.opacity})`);
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
     }
 
-    document.addEventListener("mousemove", debounce((e) => {
-      stars.forEach(star => {
-        const rect = star.getBoundingClientRect();
-        const dx = rect.left + rect.width / 2 - e.clientX;
-        const dy = rect.top + rect.height / 2 - e.clientY;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-
-        if (distance < 100) {
-          star.classList.add("glow");
-        } else {
-          star.classList.remove("glow");
+    function initParticles() {
+        particles.length = 0;
+        for (let i = 0; i < numParticles; i++) {
+            particles.push(new Particle());
         }
-      });
+    }
+
+    function connectParticles() {
+        for (let a = 0; a < particles.length; a++) {
+            for (let b = a; b < particles.length; b++) {
+                const p1 = particles[a];
+                const p2 = particles[b];
+                const distance = Math.sqrt(
+                    (p1.x - p2.x) ** 2 + (p1.y - p2.y) ** 2
+                );
+
+                if (distance < connectionDistance) {
+                    ctx.strokeStyle = currentLineColor.replace(/,(\s*\d+\.?\d*\s*)\)/, `, ${1 - (distance / connectionDistance)})`);
+                    ctx.lineWidth = 0.5;
+                    ctx.beginPath();
+                    ctx.moveTo(p1.x, p1.y);
+                    ctx.lineTo(p2.x, p2.y);
+                    ctx.stroke();
+                }
+            }
+        }
+    }
+
+    let mouse = { x: null, y: null, radius: 150 };
+
+    window.addEventListener('mousemove', debounce((e) => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
     }, 10));
-  });
+
+    window.addEventListener('mouseout', () => {
+        mouse.x = null;
+        mouse.y = null;
+    });
+
+    function handleParticles() {
+        for (let i = 0; i < particles.length; i++) {
+            const p = particles[i];
+            p.update();
+            p.draw();
+
+            if (mouse.x && mouse.y) {
+                const dx = mouse.x - p.x;
+                const dy = mouse.y - p.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (distance < mouse.radius) {
+                    const forceDirectionX = dx / distance;
+                    const forceDirectionY = dy / distance;
+                    const maxForce = 15;
+                    const attractionForce = (mouse.radius - distance) / mouse.radius * maxForce;
+
+                    p.x -= attractionForce * forceDirectionX * 0.1;
+                    p.y -= attractionForce * forceDirectionY * 0.1;
+
+                    if (distance < mouse.radius / 2) {
+                        ctx.strokeStyle = currentLineColor.replace(/,(\s*\d+\.?\d*\s*)\)/, `, ${1 - (distance / (mouse.radius / 2))})`);
+                        ctx.lineWidth = 0.8;
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(mouse.x, mouse.y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+        connectParticles();
+    }
+
+    function animateCanvas() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        handleParticles();
+        requestAnimationFrame(animateCanvas);
+    }
+    
+    // Initial setup for particles based on current theme
+    // This now relies on updateParticleColorsAndRedraw
+    animateCanvas();
+
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initParticles();
+        }, 200);
+    });
+}
+
+// ======================================= //
+// ======== Navigation Smooth Scroll ======== //
+// ======================================= //
+document.querySelectorAll('.main-nav a').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        const targetId = this.getAttribute('href');
+        gsap.to(window, {
+            duration: 1.5,
+            scrollTo: {
+                y: targetId,
+                offsetY: 80 // Offset for fixed header height
+            },
+            ease: "power3.inOut"
+        });
+    });
+});
+
+// ======================================= //
+// ======== Theme Toggle (Light/Dark Mode) ======== //
+// ======================================= //
+const themeToggleBtn = document.getElementById('theme-toggle');
+const body = document.body;
+
+// Function to apply theme and update canvas
+function applyTheme(theme) {
+    if (theme === 'light-mode') {
+        body.classList.add('light-mode');
+        themeToggleBtn.querySelector('i').classList.replace('fa-moon', 'fa-sun');
+    } else {
+        body.classList.remove('light-mode');
+        themeToggleBtn.querySelector('i').classList.replace('fa-sun', 'fa-moon');
+    }
+    localStorage.setItem('theme', theme);
+    if (!isMobileDevice) { // Update canvas if not mobile
+        updateParticleColorsAndRedraw();
+    }
+}
+
+// Check for saved theme preference on load
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme) {
+    applyTheme(savedTheme);
+} else {
+    // Default to dark mode if no preference
+    applyTheme('dark-mode');
+}
+
+// Event listener for theme toggle button
+themeToggleBtn.addEventListener('click', () => {
+    if (body.classList.contains('light-mode')) {
+        applyTheme('dark-mode');
+    } else {
+        applyTheme('light-mode');
+    }
+});
+
+// Call updateParticleColorsAndRedraw on initial load if canvas is active
+// This ensures particles have correct colors from the start based on saved theme.
+if (!isMobileDevice) {
+    updateParticleColorsAndRedraw();
 }

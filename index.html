@@ -1,121 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ayush Joshi | Portfolio</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
-  <link rel="stylesheet" href="style.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.2/vanilla-tilt.min.js" defer></script>
-  <script defer src="script.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ayush Joshi | Portfolio</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon"> 
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Share+Tech+Mono&display=swap">
+    
+    <link rel="stylesheet" href="style.css" />
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js" defer></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.2/vanilla-tilt.min.js" defer></script>
+    
+    <script defer src="script.js"></script>
 </head>
 <body>
-  <canvas id="bgCanvas"></canvas>
-  <div id="welcome-screen">
-    <h1 class="welcome-text">Welcome!</h1>
-  </div>
-  
-  <header class="hero">
-    <h1 class="animated-text">
-      <span>A</span><span>y</span><span>u</span><span>s</span><span>h</span>
-      <span></span>
-      <span>J</span><span>o</span><span>s</span><span>h</span><span>i</span>
-    </h1>    
-    <p class="tagline">Aspiring Software Developer | Passionate about AI</p>
-    <div class="scroll-prompt">↓ Scroll to explore ↓</div>
-  </header>
+    <canvas id="bgCanvas"></canvas>
+    
+    <div id="cursor-follower"></div>
 
-  <section class="about">
-    <h2>About Me</h2>
-    <div class="info-card">
-      <p>
-        Aspiring Web Developer with a strong foundation in HTML & CSS, 
-        currently expanding my skills in JavaScript, React (front-end), 
-        and Node.js (back-end). Passionate about building responsive, 
-        user-friendly websites and eager to explore AI-integrated applications 
-        in the future. Actively seeking on-site internship opportunities in the 
-        IT sector or computer science-related fields to gain hands-on experience, 
-        enhance my technical abilities, and contribute to real-world projects.
-      </p>
+    <div id="welcome-screen">
+        <h1 class="welcome-text">Welcome!</h1>
     </div>
-  </section>
+    
+    <div id="main-content-wrapper">
+        <header class="hero">
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#about-section">About</a></li>
+                    <li><a href="#skills-section">Skills</a></li>
+                    <li><a href="#projects-section">Projects</a></li>
+                    <li><a href="#education-section">Education</a></li>
+                    <li><a href="#contact-section">Contact</a></li>
+                </ul>
+                <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle light and dark mode">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+            </nav>
 
-  <section class="skills">
-    <h2>Skills</h2>
-    <div class="info-card">
-      <ul>
-        <li>Java, C, C++, Python</li>
-        <li>HTML, CSS, JavaScript, React</li>
-        <li>MySQL, OOP in C++ and Java</li>
-        <li>Experienced with Linux command-line and Windows PowerShell for scripting</li>
-        <li>Sketching, Basic 2D Animation</li>
-      </ul>
-    </div>
-  </section>
+            <h1 class="animated-text">
+                <span>A</span><span>y</span><span>u</span><span>s</span><span>h</span>
+                <span></span>
+                <span>J</span><span>o</span><span>s</span><span>h</span><span>i</span>
+            </h1>      
+            <p class="tagline">Aspiring Software Developer | Passionate about AI</p>
+            <div class="scroll-prompt">↓ Scroll to explore ↓</div>
+        </header>
 
-  <section class="projects">
-    <h2>Technical Projects</h2>
-    <div class="project-card">
-      <h3>Text to Image Generator Tool</h3>
-      <p>AI-powered tool that generates images from text prompts using Hugging Face models.</p>
-      <p><strong>Technologies:</strong> Python, Hugging Face API, PyTorch</p>
-      <a href="https://text2imggeneratorbyajoshi.streamlit.app/" class="demo-btn">View Demo →</a>
-    </div>
-    <div class="project-card">
-      <h3>TicTacToe Game</h3>
-      <p>A simple Tic Tac Toe game with Java Swing GUI.</p>
-      <p><strong>Technologies:</strong> Java, JavaSwing, GitHub, JAR (Java ARchive), BorderLayout, GridLayout</p>
-      <a href="https://github.com/ayushhjoshii/TicTacToeGUI.git" class="demo-btn">View Code →</a>
-    </div>
-    <div class="project-card">
-      <h3>Portfolio Website</h3>
-      <p>Built a responsive portfolio with HTML, CSS, and JavaScript, featuring GSAP animations and Vanilla Tilt 
-        effects. Deployed on GitHub Pages using Git and VS Code, with a documented README in Markdown.
-      </p>
-      <p><strong>Technologies:</strong> HTML, CSS, JavaScript, Vanilla JavaScript, 
-        GreenSock Animation Platform (GSAP)
-      </p>
-      <a href="https://ayushhjoshii.github.io/Ayush-Joshi-Portfolio/" class="demo-btn">View Demo →</a>
-    </div>
-  </section>
-  <section class="projects">
-    <h2>Non Technical Projects (Hobbies)</h2>
-    <div class="project-card">
-      <h3>Basic 2D animation</h3>
-      <p>Build a basic 2D animation just for fun using the mobile application Flipaclip</p>
-      <p><strong>Skills used: </strong> Drawing Skills, Imagination</p>
-      <a href="https://drive.google.com/file/d/18yNfFREx8Tvq-YRrg_Z5ZdsRCwJwG6sQ/view?usp=drive_link" class="demo-btn">View →</a>
-    </div>
-  </section>
+        <section class="about" id="about-section">
+            <h2>About Me</h2>
+            <div class="info-card">
+                <p>
+                    Aspiring Web Developer with a strong foundation in HTML & CSS, 
+                    currently expanding my skills in JavaScript, React (front-end), 
+                    and Node.js (back-end). Passionate about building responsive, 
+                    user-friendly websites and eager to explore AI-integrated applications 
+                    in the future. Actively seeking on-site internship opportunities in the 
+                    IT sector or computer science-related fields to gain hands-on experience, 
+                    enhance my technical abilities, and contribute to real-world projects.
+                </p>
+            </div>
+        </section>
 
-  <section class="education">
-    <h2>Education</h2>
-    <div class="info-card">
-      <ul>
-        <li>High School (2020, CBSE): 88.2%</li>
-        <li>Intermediate (2022, CBSE): 72%</li>
-        <li>B.Tech (Current SGPA): 8.2</li>
-      </ul>
-    </div>
-  </section>
+        <section class="skills" id="skills-section">
+            <h2>Skills</h2>
+            <div class="skill-grid">
+                <div class="skill-card">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java Logo">
+                    <p>Java</p>
+                </div>
+                <div class="skill-card">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++ Logo">
+                    <p>C/C++</p>
+                </div>
+                <div class="skill-card">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python Logo">
+                    <p>Python</p>
+                </div>
+                <div class="skill-card">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5 Logo">
+                    <p>HTML</p>
+                </div>
+                <div class="skill-card">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3 Logo">
+                    <p>CSS</p>
+                </div>
+                <div class="skill-card">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript Logo">
+                    <p>JavaScript</p>
+                </div>
+                <div class="skill-card">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React Logo">
+                    <p>React</p>
+                </div>
+                <div class="skill-card">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original-wordmark.svg" alt="MySQL Logo">
+                    <p>MySQL</p>
+                </div>
+                <div class="skill-card">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="Linux Logo">
+                    <p>Linux</p>
+                </div>
+                <div class="skill-card">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git Logo">
+                    <p>Git</p>
+                </div>
+                <div class="skill-card">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VS Code Logo">
+                    <p>VS Code</p>
+                </div>
+                <div class="skill-card">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg" alt="Photoshop Logo">
+                    <p>Sketching & 2D Animation</p>
+                </div>
+            </div>
+        </section>
 
-  <section class="contact">
-    <h2>Contact</h2>
-    <div class="info-card">
-      <p><i class="fa-solid fa-envelope"></i> josayu127@gmail.com</p>
-      <p><i class="fa-solid fa-phone"></i> +91 79055 37807</p>
-      <p><i class="fa-brands fa-github"></i> <a href="https://github.com/ayushhjoshii">GitHub</a></p>
-      <p><i class="fa-brands fa-linkedin"></i> <a href="https://www.linkedin.com/in/ayushhjoshii/">LinkedIn</a></p>
-      <p><i class="fa-brands fa-instagram"></i> <a href="https://www.instagram.com/ayushhjoshii?igsh=ang5bG9wZTdoNm1z">Instagram</a></p>
-    </div>
-  </section>
+        <section class="projects" id="projects-section">
+            <h2>Technical Projects</h2>
+            <div class="projects-grid"> <div class="project-card">
+                    <img src="https://photos.fife.usercontent.google.com/pw/AP1GczMlm_8OdzmVSjhT2KWQpAsfYyDdYtbs6e3GN5ytpzfDGR3FEULO0I87=w1476-h827-s-no-gm?authuser=0" alt="Text to Image Generator Screenshot" class="project-screenshot">
+                    <h3>Text to Image Generator Tool</h3>
+                    <p>AI-powered tool that generates images from text prompts using Hugging Face models.</p>
+                    <p><strong>Technologies:</strong> Python, Hugging Face API, PyTorch</p>
+                    <a href="https://text2imggeneratorbyajoshi.streamlit.app/" class="demo-btn" target="_blank">View Demo →</a>
+                </div>
+                <div class="project-card">
+                    <img src="https://photos.app.goo.gl/br6b4XBTGu1iBGFz8" alt="Tic Tac Toe Game Screenshot" class="project-screenshot">
+                    <h3>TicTacToe Game</h3>
+                    <p>A simple Tic Tac Toe game with Java Swing GUI.</p>
+                    <p><strong>Technologies:</strong> Java, JavaSwing, GitHub, JAR (Java ARchive), BorderLayout, GridLayout</p>
+                    <a href="https://github.com/ayushhjoshii/TicTacToeGUI.git" class="demo-btn" target="_blank">View Code →</a>
+                </div>
+                <div class="project-card">
+                    <img src="https://photos.google.com/album/AF1QipNv4qLI_VePyvyhQuDRlBpyBhlorduNzuMX2aaB/photo/AF1QipM8MXBsLKwx4QsXKE3xZsbtx1fxW8NEEUQvPDSR" alt="Portfolio Website Screenshot" class="project-screenshot">
+                    <h3>Portfolio Website</h3>
+                    <p>Built a responsive portfolio with HTML, CSS, and JavaScript, featuring GSAP animations and Vanilla Tilt 
+                        effects. Deployed on GitHub Pages using Git and VS Code, with a documented README in Markdown.
+                    </p>
+                    <p><strong>Technologies:</strong> HTML, CSS, JavaScript, Vanilla JavaScript, 
+                        GreenSock Animation Platform (GSAP)
+                    </p>
+                    <a href="https://ayushhjoshii.github.io/Ayush-Joshi-Portfolio/" class="demo-btn" target="_blank">View Demo →</a>
+                </div>
+            </div> </section>
+        <section class="projects">
+            <h2>Non Technical Projects (Hobbies)</h2>
+            <div class="project-card">
+                <h3>Basic 2D animation</h3>
+                <p>Build a basic 2D animation just for fun using the mobile application Flipaclip</p>
+                <p><strong>Skills used: </strong> Drawing Skills, Imagination</p>
+                <a href="https://drive.google.com/file/d/18yNfFREx8Tvq-YRrg_Z5ZdsRCwJwG6sQ/view?usp=drive_link" class="demo-btn" target="_blank">View →</a>
+            </div>
+        </section>
 
-  <footer>
-    <p>© 2025 Ayush Joshi | All rights reserved.</p>
-  </footer>
+        <section class="education" id="education-section">
+            <h2>Education</h2>
+            <div class="info-card">
+                <ul>
+                    <li>High School (2020, CBSE): 88.2%</li>
+                    <li>Intermediate (2022, CBSE): 72%</li>
+                    <li>B.Tech (Current SGPA): 8.2</li>
+                </ul>
+            </div>
+        </section>
 
-  <script src="https://kit.fontawesome.com/fbb3ebffd7.js" crossorigin="anonymous" async></script>
+        <section class="contact" id="contact-section">
+            <h2>Contact</h2>
+            <div class="info-card">
+                <p><i class="fa-solid fa-envelope"></i> josayu127@gmail.com</p>
+                <p><i class="fa-solid fa-phone"></i> +91 79055 37807</p>
+                <p><i class="fa-brands fa-github"></i> <a href="https://github.com/ayushhjoshii" target="_blank">GitHub</a></p>
+                <p><i class="fa-brands fa-linkedin"></i> <a href="https://www.linkedin.com/in/ayushhjoshii/" target="_blank">LinkedIn</a></p>
+                <p><i class="fa-brands fa-instagram"></i> <a href="https://www.instagram.com/ayushhjoshii?igsh=ang5bG9wZTdoNm1z" target="_blank">Instagram</a></p>
+            </div>
+        </section>
+    </div> <footer>
+        <p>© 2025 Ayush Joshi | All rights reserved.</p>
+    </footer>
+
+    <script src="https://kit.fontawesome.com/fbb3ebffd7.js" crossorigin="anonymous" async></script>
 </body>
 </html>
