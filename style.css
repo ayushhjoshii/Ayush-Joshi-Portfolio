@@ -365,12 +365,13 @@ h2 {
     border: 1px solid var(--ui-hover-border); /* Highlight border */
 }
 
+/* Project Card specifics - no margin on card itself, handled by grid gap */
 .project-card {
-    /* margin will be handled by the grid now */
     display: flex; /* Flexbox for layout of image and text */
     flex-direction: column; /* Stack image and text vertically */
     align-items: center; /* Center content */
 }
+
 
 .info-card {
     /* No default cursor on info-card if the element is not interactive */
@@ -379,6 +380,8 @@ h2 {
 
 .project-card .project-screenshot {
     max-width: 100%; /* Ensure image fits card width */
+    height: 180px; /* Fixed height for consistency */
+    object-fit: cover; /* Cover ensures image fills the space without distortion */
     border-radius: 10px; /* Slightly rounded corners for images */
     margin-bottom: 15px; /* Space between image and text */
     box-shadow: 0 0 10px rgba(0, 255, 255, 0.2); /* Subtle glow for screenshots */
@@ -551,7 +554,8 @@ footer {
 /* ======================================= */
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid, min width 300px per card */
+    /* This creates 3 columns when space allows, then wraps */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
     gap: 2rem; /* Space between project cards */
     padding-top: 1rem; /* Add some padding above the grid */
 }
@@ -596,7 +600,6 @@ footer {
     background: linear-gradient(-45deg, #f8f8f8, #f0f0f0, #e8e8e8, #f8f8f8); /* Very light grey */
     background-size: 400% 400%;
     color: #222222; /* Darker primary text */
-    /* Remove the overlay for light mode to show pure light background */
     
     /* Text Colors */
     --text-primary: #222222; /* Deep Black/Gray */
