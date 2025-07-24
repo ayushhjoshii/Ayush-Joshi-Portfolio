@@ -174,9 +174,6 @@ function updateParticleColorsAndRedraw() {
     ];
     currentLineColor = getCssVar('--canvas-line-clr');
 
-    // Re-initialize particles with new colors but keep their positions
-    // For a smoother transition, you could animate particle colors.
-    // For now, re-initializing creates new particles with new colors.
     initParticles(); 
 }
 
@@ -294,19 +291,7 @@ if (!isMobileDevice) {
         requestAnimationFrame(animateCanvas);
     }
     
-    // Initial setup for particles based on current theme
-    // This now relies on updateParticleColorsAndRedraw
     animateCanvas();
-
-    let resizeTimeout;
-    window.addEventListener('resize', () => {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            initParticles();
-        }, 200);
-    });
 }
 
 // ======================================= //
@@ -354,8 +339,7 @@ const savedTheme = localStorage.getItem('theme');
 if (savedTheme) {
     applyTheme(savedTheme);
 } else {
-    // Default to dark mode if no preference
-    applyTheme('dark-mode');
+    applyTheme('dark-mode'); // Default to dark mode if no preference
 }
 
 // Event listener for theme toggle button
@@ -371,4 +355,26 @@ themeToggleBtn.addEventListener('click', () => {
 // This ensures particles have correct colors from the start based on saved theme.
 if (!isMobileDevice) {
     updateParticleColorsAndRedraw();
+}
+
+// ======================================= //
+// ======== Video Project Play on Hover ======== //
+// ======================================= //
+const videoProjectCard = document.querySelector('.video-project-card');
+
+if (videoProjectCard && !isMobileDevice) { // Only enable on desktop and if the card exists
+    const videoElement = videoProjectCard.querySelector('video');
+
+    if (videoElement) {
+        videoProjectCard.addEventListener('mouseenter', () => {
+            videoElement.play();
+        });
+
+        videoProjectCard.addEventListener('mouseleave', () => {
+            videoElement.pause();
+            videoElement.currentTime = 0; // Reset video to beginning
+            // IMPORTANT FIX: Forcing poster to reappear
+            videoElement.load(); // Reloads the video element, forcing the poster to show
+        });
+    }
 }
