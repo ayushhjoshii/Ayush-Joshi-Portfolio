@@ -9,6 +9,9 @@ function debounce(func, wait) {
     };
 }
 
+// Global variable for blurred element (main content wrapper)
+const blurredElement = document.getElementById('main-content-wrapper');
+
 // ======================================= //
 // ======== Welcome Screen & Hero Entrance ======== //
 // ======================================= //
@@ -16,20 +19,26 @@ window.addEventListener("load", () => {
     const welcome = document.getElementById("welcome-screen");
     const hero = document.querySelector(".hero");
     const scrollPrompt = document.querySelector(".scroll-prompt");
+    const welcomeText = document.querySelector(".welcome-text");
 
-    gsap.timeline({ delay: 0.5 }) // Start welcome animation after a slight delay
-        .to(".welcome-text", {
+    // Initial state: welcome screen is solid black, content behind is blurred
+    // (Blur is set in CSS on #main-content-wrapper)
+
+    gsap.timeline()
+        .to(welcomeText, { // Animate Welcome Text In
             opacity: 1,
-            y: 0,
+            // y: 0, // No Y animation needed if it's already centered by CSS flexbox
             duration: 1.5,
-            ease: "power2.out"
+            ease: "power2.out",
+            delay: 1 // Welcome text appears 1 second after black screen starts
         })
-        .to(welcome, {
+        .to(welcome, { // Fade out Welcome Screen (black overlay)
             opacity: 0,
             duration: 1,
             ease: "power2.inOut",
+            delay: 1, // Welcome screen fades out 1 second after text is fully visible
             onComplete: () => {
-                welcome.remove();
+                welcome.remove(); // Remove welcome screen from DOM after it fades out
                 hero.classList.add("show"); // Ensure hero is visible
                 gsap.from(scrollPrompt, { // Animate scroll prompt
                     opacity: 0,
@@ -39,7 +48,12 @@ window.addEventListener("load", () => {
                     ease: "power2.out"
                 });
             }
-        }, "+=1"); // Start fading welcome screen after 1s pause
+        })
+        .to(blurredElement, { // Animate blur out on main content wrapper
+            filter: "blur(0px)",
+            duration: 1.5, // Matches or slightly exceeds welcome screen fade duration for smoothness
+            ease: "power2.inOut"
+        }, "<"); // Starts blur animation at the same time as welcome screen fades out
 });
 
 // ======================================= //
@@ -351,11 +365,15 @@ themeToggleBtn.addEventListener('click', () => {
     }
 });
 
-// Call updateParticleColorsAndRedraw on initial load if canvas is active
-// This ensures particles have correct colors from the start based on saved theme.
+// Initial call to update canvas colors based on loaded theme
+// (This is separate from the welcome screen sequence)
 if (!isMobileDevice) {
-    updateParticleColorsAndRedraw();
+    // Only call after the initial blur has been set by GSAP, not just on 'load' event
+    // The blur is now removed by the welcome screen timeline,
+    // so we call updateParticleColorsAndRedraw after that timeline ends, or rely on applyTheme call on load.
+    // The current setup `applyTheme` calls it, which is correct.
 }
+
 
 // ======================================= //
 // ======== Video Project Play on Hover ======== //
@@ -372,8 +390,7 @@ if (videoProjectCard && !isMobileDevice) { // Only enable on desktop and if the 
 
         videoProjectCard.addEventListener('mouseleave', () => {
             videoElement.pause();
-            videoElement.currentTime = 0; // Reset video to beginning
-            // IMPORTANT FIX: Forcing poster to reappear
+            videoElement.currentTime = 0;
             videoElement.load(); // Reloads the video element, forcing the poster to show
         });
     }

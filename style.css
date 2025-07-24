@@ -48,9 +48,9 @@
     --footer-text: var(--clr-light-blue);
 
     /* Welcome Screen */
-    --welcome-bg: var(--clr-dark-blue);
-    --welcome-text: var(--clr-light-blue);
-    --welcome-shadow: 0 0 30px var(--clr-light-blue), 0 0 60px #0ea5e9;
+    --welcome-bg: #000; /* NEW: Completely black for welcome screen */
+    --welcome-text-color: #fff; /* NEW: White for welcome text */
+    --welcome-shadow: 0 0 20px rgba(255,255,255,0.7), 0 0 40px rgba(255,255,255,0.5); /* White glow */
 
     /* Cursor Follower */
     --cursor-follower-size: 25px;
@@ -342,6 +342,13 @@ h2 {
     background: radial-gradient(ellipse at center, var(--clr-dark-blue) 0%, var(--clr-dark-indigo) 100%); /* Fallback/initial */
 }
 
+/* Main content wrapper: Applies blur to everything below welcome screen */
+#main-content-wrapper { /* NEW RULE */
+    filter: blur(5px); /* Initial blur applied here */
+    transition: filter 1.5s ease-in-out; /* Optional smooth transition for blur */
+}
+
+
 /* Info Panels & Project Cards (Enhanced Glassmorphism) */
 .info-card, .project-card {
     font-family: 'Poppins', sans-serif;
@@ -569,7 +576,7 @@ footer {
     width: 100%;
     height: 300px; /* Keep height as requested */
     object-fit: cover; /* Still cover to fill space */
-    object-position: 50% 35%; /* NEW: Align content to the top */
+    object-position: 50% 35%; /* Aligns content to the top */
     border-radius: 10px;
     margin-bottom: 15px;
     box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
@@ -655,7 +662,7 @@ footer {
 
     /* Welcome Screen */
     --welcome-bg: #f8f8f8;
-    --welcome-text: var(--heading-color-main);
+    --welcome-text-color: var(--heading-color-main);
     --welcome-shadow: 0 0 20px rgba(0, 86, 179, 0.2), 0 0 40px rgba(26, 115, 232, 0.3);
 
     /* Button Gradient (Lighter, more subtle) */
