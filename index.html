@@ -1,191 +1,327 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ayush Joshi | Portfolio</title>
-    <link rel="icon" href="favicon.ico" type="image/x-icon"> 
-    
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Share+Tech+Mono&display=swap">
-    
-    <link rel="stylesheet" href="style.css" />
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js" defer></script>
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.2/vanilla-tilt.min.js" defer></script>
-    
-    <script defer src="script.js"></script>
-</head>
-<body>
-    <canvas id="bgCanvas"></canvas>
-    
-    <div id="cursor-follower"></div>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-    <div id="welcome-screen">
-        <h1 class="welcome-text">Welcome!</h1>
-    </div>
+    <title>Marvel HTML Bootstrap 4 Template</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/unicons.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+
+    <!-- MAIN STYLE -->
+    <link rel="stylesheet" href="css/tooplate-style.css">
     
-    <div id="main-content-wrapper">
-        <header class="hero">
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="#about-section">About</a></li>
-                    <li><a href="#skills-section">Skills</a></li>
-                    <li><a href="#projects-section">Projects</a></li>
-                    <li><a href="#education-section">Education</a></li>
-                    <li><a href="#contact-section">Contact</a></li>
+<!--
+
+Tooplate 2115 Marvel
+
+https://www.tooplate.com/view/2115-marvel
+
+-->
+  </head>
+  <body>
+
+    <!-- MENU -->
+    <nav class="navbar navbar-expand-sm navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class='uil uil-user'></i> Ayush</a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a href="#about" class="nav-link"><span data-hover="About">About</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#project" class="nav-link"><span data-hover="Projects">Projects</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#resume" class="nav-link"><span data-hover="Resume">Resume</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#contact" class="nav-link"><span data-hover="Contact">Contact</span></a>
+                    </li>
                 </ul>
-                <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle light and dark mode">
-                    <i class="fa-solid fa-moon"></i>
-                </button>
-            </nav>
 
-            <h1 class="animated-text">
-                <span>A</span><span>y</span><span>u</span><span>s</span><span>h</span>
-                <span></span>
-                <span>J</span><span>o</span><span>s</span><span>h</span><span>i</span>
-            </h1>      
-            <p class="tagline">Aspiring Software Developer | Passionate about AI</p>
-            <div class="scroll-prompt">↓ Scroll to explore ↓</div>
-        </header>
-
-        <section class="about" id="about-section">
-            <h2>About Me</h2>
-            <div class="info-card">
-                <p>
-                    Aspiring Web Developer with a strong foundation in HTML & CSS, 
-                    currently expanding my skills in JavaScript, React (front-end), 
-                    and Node.js (back-end). Passionate about building responsive, 
-                    user-friendly websites and eager to explore AI-integrated applications 
-                    in the future. Actively seeking on-site internship opportunities in the 
-                    IT sector or computer science-related fields to gain hands-on experience, 
-                    enhance my technical abilities, and contribute to real-world projects.
-                </p>
-            </div>
-        </section>
-
-        <section class="skills" id="skills-section">
-            <h2>Skills</h2>
-            <div class="skill-grid">
-                <div class="skill-card">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java Logo">
-                    <p>Java</p>
-                </div>
-                <div class="skill-card">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++ Logo">
-                    <p>C/C++</p>
-                </div>
-                <div class="skill-card">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python Logo">
-                    <p>Python</p>
-                </div>
-                <div class="skill-card">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5 Logo">
-                    <p>HTML</p>
-                </div>
-                <div class="skill-card">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3 Logo">
-                    <p>CSS</p>
-                </div>
-                <div class="skill-card">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript Logo">
-                    <p>JavaScript</p>
-                </div>
-                <div class="skill-card">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React Logo">
-                    <p>React</p>
-                </div>
-                <div class="skill-card">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original-wordmark.svg" alt="MySQL Logo">
-                    <p>MySQL</p>
-                </div>
-                <div class="skill-card">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="Linux Logo">
-                    <p>Linux</p>
-                </div>
-                <div class="skill-card">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git Logo">
-                    <p>Git</p>
-                </div>
-                <div class="skill-card">
-                    <img src="https://png.pngtree.com/png-clipart/20220225/ourmid/pngtree-green-leaf-decoration-material-png-image_4448698.png" alt="VS Code Logo">
-                    <p>mongoDB</p>
-                </div>
-                <div class="skill-card">
-                    <img src="https://static.thenounproject.com/png/3406623-200.png" alt="Photoshop Logo">
-                    <p>Sketching</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="projects" id="projects-section">
-            <h2>Technical Projects</h2>
-            <div class="projects-grid"> <div class="project-card">
-                    <img src="https://raw.githubusercontent.com/ayushhjoshii/Ayush-Joshi-Portfolio/727d39b1f6009010aea102009868a4a49774a733/media/tti.png" alt="Text to Image Generator Screenshot" class="project-screenshot">
-                    <h3>Text to Image Generator Tool</h3>
-                    <p>AI-powered tool that generates images from text prompts using Hugging Face models.</p>
-                    <p><strong>Technologies:</strong> Python, Hugging Face API, PyTorch</p>
-                    <a href="https://text2imggeneratorbyajoshi.streamlit.app/" class="demo-btn" target="_blank">View Demo →</a>
-                </div>
-                <div class="project-card">
-                    <img src="https://raw.githubusercontent.com/ayushhjoshii/Ayush-Joshi-Portfolio/727d39b1f6009010aea102009868a4a49774a733/media/ttt.png" alt="Tic Tac Toe Game Screenshot" class="project-screenshot">
-                    <h3>TicTacToe Game</h3>
-                    <p>A simple Tic Tac Toe game with Java Swing GUI.</p>
-                    <p><strong>Technologies:</strong> Java, JavaSwing, GitHub, JAR (Java ARchive), BorderLayout, GridLayout</p>
-                    <a href="https://github.com/ayushhjoshii/TicTacToeGUI.git" class="demo-btn" target="_blank">View Code →</a>
-                </div>
-                <div class="project-card">
-                    <img src="https://raw.githubusercontent.com/ayushhjoshii/Ayush-Joshi-Portfolio/727d39b1f6009010aea102009868a4a49774a733/media/pw.png" alt="Portfolio Website Screenshot" class="project-screenshot">
-                    <h3>Portfolio Website</h3>
-                    <p>Built a responsive portfolio with HTML, CSS, and JavaScript, featuring GSAP animations and Vanilla Tilt 
-                        effects. Deployed on GitHub Pages using Git and VS Code, with a documented README in Markdown.
-                    </p>
-                    <p><strong>Technologies:</strong> HTML, CSS, JavaScript, Vanilla JavaScript, 
-                        GreenSock Animation Platform (GSAP)
-                    </p>
-                    <a href="https://ayushhjoshii.github.io/Ayush-Joshi-Portfolio/" class="demo-btn" target="_blank">View Demo →</a>
-                </div>
-            </div> </section>
-        <section class="projects">
-            <h2>Non Technical Projects (Hobbies)</h2>
-            <div class="project-card video-project-card"> <video preload="none" loop muted playsinline 
-                       poster="https://raw.githubusercontent.com/ayushhjoshii/Ayush-Joshi-Portfolio/main/media/Gemini_Generated_Image_xw0q6yxw0q6yxw0q.png">
-                    <source src="https://raw.githubusercontent.com/ayushhjoshii/Ayush-Joshi-Portfolio/7649bd324746bf3473cb33970251e3eba1140714/media/aj%20animation%20(1).mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                <h3>Basic 2D animation</h3>
-                <p>Build a basic 2D animation just for fun using the mobile application Flipaclip</p>
-                <p><strong>Skills used: </strong> Drawing Skills, Imagination</p>
-            </div>
-        </section>
-
-        <section class="education" id="education-section">
-            <h2>Education</h2>
-            <div class="info-card">
-                <ul>
-                    <li>High School (2020, CBSE): 88.2%</li>
-                    <li>Intermediate (2022, CBSE): 72%</li>
-                    <li>B.Tech (Current SGPA): 8.2</li>
+                <ul class="navbar-nav ml-lg-auto">
+                    <div class="ml-lg-4">
+                      <div class="color-mode d-lg-flex justify-content-center align-items-center">
+                        <i class="color-mode-icon"></i>
+                        Color mode
+                      </div>
+                    </div>
                 </ul>
             </div>
-        </section>
+        </div>
+    </nav>
 
-        <section class="contact" id="contact-section">
-            <h2>Contact</h2>
-            <div class="info-card">
-                <p><i class="fa-solid fa-envelope"></i> josayu127@gmail.com</p>
-                <p><i class="fa-solid fa-phone-volume"></i> +91 79055 37807</p>
-                <p><i class="fa-brands fa-github"></i> <a href="https://github.com/ayushhjoshii" target="_blank">GitHub</a></p>
-                <p><i class="fa-brands fa-linkedin"></i> <a href="https://www.linkedin.com/in/ayushhjoshii/" target="_blank">LinkedIn</a></p>
-                <p><i class="fa-brands fa-instagram"></i> <a href="https://www.instagram.com/ayushhjoshii?igsh=ang5bG9wZTdoNm1z" target="_blank">Instagram</a></p>
+    <!-- ABOUT -->
+    <section class="about full-screen d-lg-flex justify-content-center align-items-center" id="about">
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-lg-7 col-md-12 col-12 d-flex align-items-center">
+                    <div class="about-text">
+                        <small class="small-text">Welcome to <span class="mobile-block">my portfolio website!</span></small>
+                        <h1 class="animated animated-text">
+                            <span class="mr-2">Hey folks, I'm</span>
+                                <div class="animated-info">
+                                    <span class="animated-item">Ayush Joshi</span>
+                                    <span class="animated-item">a Developer</span>
+                                    <span class="animated-item">The Man</span>
+                                </div>
+                        </h1>
+
+                        <p>Building a successful product is a challenge. I am highly energetic in user experience design, interfaces and web development.</p>
+                        
+                        <div class="custom-btn-group mt-4">
+                          <a href="#" class="btn mr-lg-2 custom-btn"><i class='uil uil-file-alt'></i> Download Resume</a>
+                          <a href="#contact" class="btn custom-btn custom-btn-bg custom-btn-link">Get a free quote</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-5 col-md-12 col-12">
+                    <div class="about-image svg">
+                        <img src="images/undraw/undraw_software_engineer_lvl5.svg" class="img-fluid" alt="svg image">
+                    </div>
+                </div>
+
             </div>
-        </section>
-    </div> <footer>
-        <p>© 2025 Ayush Joshi | All rights reserved.</p>
-    </footer>
+        </div>
+    </section>
 
-    <script src="https://kit.fontawesome.com/fbb3ebffd7.js" crossorigin="anonymous" async></script>
-</body>
+    <!-- PROJECTS -->
+    <section class="project py-5" id="project">
+        <div class="container">
+                
+                <div class="row">
+                  <div class="col-lg-11 text-center mx-auto col-12">
+
+                      <div class="col-lg-8 mx-auto">
+                        <h2>Projects I have made so far</h2>
+                      </div>
+
+                      <div class="owl-carousel owl-theme">
+                        <div class="item">
+                          <div class="project-info">
+                            <img src="images/project/q1 (1).png" class="img-fluid" alt="project image">
+                          </div>
+                        </div>
+
+                        <div class="item">
+                          <div class="project-info">
+                            <a href="https://text2imggeneratorbyajoshi.streamlit.app/" target="_blank">
+                              <img src="images/project/q2 (1).png" class="img-fluid" alt="project image">
+                            </a>
+                          </div>
+                        </div>
+
+                        <div class="item">
+                          <div class="project-info">
+                            <img src="images/project/q3 (1).png" class="img-fluid" alt="project image">
+                          </div>
+                        </div>
+
+                        <!-- <div class="item">
+                          <div class="project-info">
+                            <img src="images/project/project-image04.png" class="img-fluid" alt="project image">
+                          </div>
+                        </div>
+
+                        <div class="item">
+                          <div class="project-info">
+                            <img src="images/project/project-image05.png" class="img-fluid" alt="project image">
+                          </div>
+                        </div> -->
+                      </div>
+
+                  </div>
+                </div>
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="resume py-5 d-lg-flex justify-content-center align-items-center" id="resume">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-6 col-12">
+                  <h2 class="mb-4">Experiences</h2>
+
+                    <div class="timeline">
+                        <div class="timeline-wrapper">
+                             <div class="timeline-yr">
+                                  <span>2025</span>
+                             </div>
+                             <div class="timeline-info">
+                                  <h3><span>Software Developer Intern</span><small>CodeUp</small></h3>
+                                  <p>I collaborated closely with experienced Industry Engineers, bridging the gap between academic theory and real-world software development.</p>
+                             </div>
+                        </div>
+
+                        <!-- <div class="timeline-wrapper">
+                            <div class="timeline-yr">
+                                <span>2018</span>
+                            </div>
+                            <div class="timeline-info">
+                                <h3><span>UX Designer</span><small>Digital Ace</small></h3>
+                                <p>Fusce rutrum augue id orci rhoncus molestie. Nunc auctor dignissim lacus vel iaculis.</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-wrapper">
+                            <div class="timeline-yr">
+                                <span>2016</span>
+                            </div>
+                            <div class="timeline-info">
+                                <h3><span>UI Freelancer</h3>
+                                <p>Sed fringilla vitae enim sit amet cursus. Sed cursus dictum tortor quis pharetra. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-wrapper">
+                            <div class="timeline-yr">
+                                <span>2014</span>
+                            </div>
+                            <div class="timeline-info">
+                                <h3><span>Junior Designer<small>Crafted Co.</small></h3>
+                                <p>Cras scelerisque scelerisque condimentum. Nullam at volutpat mi. Nunc auctor ipsum eget magna consequat viverra.</p>
+                            </div>
+                        </div> -->
+
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-12">
+                  <h2 class="mb-4 mobile-mt-2">Education</h2>
+
+                    <div class="timeline">
+                        <div class="timeline-wrapper">
+                             <div class="timeline-yr">
+                                  <span>2020</span>
+                             </div>
+                             <div class="timeline-info">
+                                  <h3><span>High-School</span><small>CBSE</small></h3>
+                                  <p>Percentage: 88.2%</p>
+                             </div>
+                        </div>
+
+                        <div class="timeline-wrapper">
+                            <div class="timeline-yr">
+                                <span>2022</span>
+                            </div>
+                            <div class="timeline-info">
+                                <h3><span>Intermediate</span><small>CBSE</small></h3>
+                                <p>Percentage: 72%</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-wrapper">
+                            <div class="timeline-yr">
+                                <span>2023</span>
+                            </div>
+                            <div class="timeline-info">
+                                <h3><span>B.Tech</span><small>RTU</small></h3>
+                                <p>SGPA: 8.78</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact py-5" id="contact">
+      <div class="container">
+        <div class="row">
+          
+          <div class="col-lg-5 mr-lg-5 col-12">
+            <div class="google-map w-100">
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12088.558402180099!2d-73.99373482142036!3d40.75895421922642!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25855b8fb3083%3A0xa0f9aef176042a5c!2sTheater+District%2C+New+York%2C+NY%2C+USA!5e0!3m2!1sen!2smm!4v1549875377188" width="400" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
+            </div>
+
+            <div class="contact-info d-flex justify-content-between align-items-center py-4 px-lg-5">
+                <div class="contact-info-item">
+                  <h3 class="mb-3 text-white">Say hello</h3>
+                  <p class="footer-text mb-0">010 020 0960</p>
+                  <p><a href="mailto:hello@company.co">hello@company.co</a></p>
+                </div>
+
+                <ul class="social-links">
+                     <li><a href="#" class="uil uil-dribbble" data-toggle="tooltip" data-placement="left" title="Dribbble"></a></li>
+                     <li><a href="#" class="uil uil-instagram" data-toggle="tooltip" data-placement="left" title="Instagram"></a></li>
+                     <li><a href="#" class="uil uil-youtube" data-toggle="tooltip" data-placement="left" title="Youtube"></a></li>
+                </ul>
+            </div>
+          </div>
+
+          <div class="col-lg-6 col-12">
+            <div class="contact-form">
+              <h2 class="mb-4">Interested to work together? Let's talk</h2>
+
+              <form action="" method="get">
+                <div class="row">
+                  <div class="col-lg-6 col-12">
+                    <input type="text" class="form-control" name="name" placeholder="Your Name" id="name">
+                  </div>
+
+                  <div class="col-lg-6 col-12">
+                    <input type="email" class="form-control" name="email" placeholder="Email" id="email">
+                  </div>
+
+                  <div class="col-12">
+                    <textarea name="message" rows="6" class="form-control" id="message" placeholder="Message"></textarea>
+                  </div>
+
+                  <div class="ml-lg-auto col-lg-5 col-12">
+                    <input type="submit" class="form-control submit-btn" value="Send Button">
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+     <footer class="footer py-5">
+          <div class="container">
+               <div class="row">
+
+                    <div class="col-lg-12 col-12">                                
+                        <p class="copyright-text text-center">Copyright &copy; 2019 Company Name . All rights reserved</p>
+                        <p class="copyright-text text-center">Designed by <a rel="nofollow" href="https://www.facebook.com/tooplate">Tooplate</a></p>
+                    </div>
+                    
+               </div>
+          </div>
+     </footer>
+
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/Headroom.js"></script>
+    <script src="js/jQuery.headroom.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/smoothscroll.js"></script>
+    <script src="js/custom.js"></script>
+
+  </body>
 </html>
